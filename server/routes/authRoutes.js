@@ -2,7 +2,7 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
 const User = require("../models/User");
-
+const authorizeRoles = require("../middleware/roleMiddleware");
 const router = express.Router();
 
 router.post(
@@ -84,6 +84,14 @@ const protect = require("../middleware/authMiddleware");
 
 router.get("/profile", protect, (req, res) => {
   res.json(req.user);
+});
+
+router.get("/client-only", protect, authorizeRoles("client"), (req, res) => {
+  res.json({ message: "Welcome Client" });
+});
+
+router.get("/freelancer-only", protect, authorizeRoles("freelancer"), (req, res) => {
+  res.json({ message: "Welcome Freelancer" });
 });
 
 module.exports = router;
