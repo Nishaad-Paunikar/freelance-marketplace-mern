@@ -2,12 +2,11 @@
 
 A full-stack MERN (MongoDB, Express, React, Node.js) marketplace connecting freelancers with clients.
 
-## Project Information
+## Project Overview
 
-- **Name:** Nishaad Paunikar
-- **Register Number:** 24BIT0264
-- **Course:** BITE304L - Web Technologies
-- **Slot:** C1 + TC1
+A full-stack freelance marketplace platform where clients can post projects and freelancers can submit proposals.
+
+Built as part of a full-stack web application project using the MERN stack.
 
 ## Tech Stack
 
