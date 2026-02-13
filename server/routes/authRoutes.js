@@ -79,4 +79,11 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+const protect = require("../middleware/authMiddleware");
+
+router.get("/profile", protect, (req, res) => {
+  res.json(req.user);
+});
+
 module.exports = router;
