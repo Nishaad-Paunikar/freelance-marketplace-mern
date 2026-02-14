@@ -42,3 +42,31 @@ exports.getProjectById = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.completeProject = async (req, res) => {
+  try {
+    const project = await Project.findById(req.params.id);
+
+    if (!project)
+      return res.status(404).json({ message: "Project not found" });
+
+    if (project.client.toString() !== req.user._id.toString())
+      return res.status(403).json({ message: "Not authorized" });
+
+    if (project.status !== "assigned")
+      return res.status(400).json({
+        message: "Project must be assigned before completion"
+      });
+
+    project.status = "completed";
+    await project.save();
+
+    res.json({
+      message: "Project marked as completed",
+      project
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
