@@ -4,6 +4,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const projectRoutes = require("./routes/projectRoutes");
 
 dotenv.config();
 connectDB();
@@ -33,6 +34,8 @@ app.get('/api/health', (req, res) => {
     message: 'Server running'
   });
 });
+
+app.use("/api/projects", projectRoutes);
 
 const PORT = process.env.PORT || 5000;
 
