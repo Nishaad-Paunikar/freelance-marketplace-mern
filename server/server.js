@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const projectRoutes = require("./routes/projectRoutes");
+const proposalRoutes = require("./routes/proposalRoutes");
 
 dotenv.config();
 connectDB();
@@ -34,6 +35,8 @@ app.get('/api/health', (req, res) => {
     message: 'Server running'
   });
 });
+
+app.use("/api/proposals", proposalRoutes);
 
 app.use("/api/projects", projectRoutes);
 
