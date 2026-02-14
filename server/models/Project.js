@@ -18,6 +18,18 @@ const projectSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true
+    },
+
+    status: {
+      type: String,
+      enum: ["open", "assigned", "completed"],
+      default: "open"
+    },
+
+    assignedFreelancer: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null
     }
   },
   { timestamps: true }

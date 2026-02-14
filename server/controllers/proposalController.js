@@ -47,3 +47,36 @@ exports.getProjectProposals = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.acceptProposal = async (req, res) => {
+  try {
+    const proposal = await Proposal.findById(req.params.id)
+      .populate("project");
+
+    if (!proposal)
+      return res.status(404).json({ message: "Proposal not found" });
+
+    const project = await Project.findById(proposal.project._id);
+
+    if (project.client.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: "Not authorized" });
+    }
+
+    if (project.status !== "open") {
+      return res.status(400).json({ message: "Project already assigned" });
+    }
+
+    project.status = "assigned";
+    project.assignedFreelancer = proposal.freelancer;
+
+    await project.save();
+
+    res.json({
+      message: "Proposal accepted",
+      project
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
