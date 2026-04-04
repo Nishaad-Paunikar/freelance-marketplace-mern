@@ -1,0 +1,202 @@
+/* FreelancerDashboard.css */
+
+/* ── Welcome header (reuse dashboard-welcome from ClientDashboard) ──────────── */
+
+/* ── Proposals list ──────────────────────────────────────────── */
+.freelancer-proposals {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* ── Individual proposal card ────────────────────────────────── */
+.fl-proposal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.fl-proposal-card:hover {
+  border-color: var(--border-light);
+  box-shadow: var(--shadow-md);
+}
+
+.fl-proposal-card.accepted {
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.fl-proposal-card.rejected {
+  opacity: 0.7;
+}
+
+/* ── Card body ───────────────────────────────────────────────── */
+.fl-proposal-body {
+  padding: var(--space-lg) var(--space-xl);
+}
+
+.fl-proposal-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Project info */
+.fl-project-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.fl-project-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  display: block;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fl-project-title:hover {
+  color: var(--accent-light);
+}
+
+.fl-project-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.fl-project-budget {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Bid + status area */
+.fl-bid-area {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-xs);
+  flex-shrink: 0;
+}
+
+.fl-bid-amount {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+}
+
+.fl-bid-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Message preview */
+.fl-proposal-message {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.fl-proposal-message.expanded {
+  -webkit-line-clamp: unset;
+  display: block;
+}
+
+/* ── Card footer (actions) ───────────────────────────────────── */
+.fl-proposal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-xl);
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  flex-wrap: wrap;
+}
+
+.fl-proposal-date {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.fl-proposal-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* ── Inline Edit Form ────────────────────────────────────────── */
+.fl-edit-form {
+  padding: var(--space-lg) var(--space-xl);
+  background: rgba(124, 58, 237, 0.04);
+  border-top: 2px solid var(--accent-primary);
+}
+
+.fl-edit-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-light);
+  margin-bottom: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.fl-edit-actions {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+/* ── Delete confirm inline ───────────────────────────────────── */
+.fl-delete-confirm {
+  padding: var(--space-md) var(--space-xl);
+  background: rgba(239, 68, 68, 0.06);
+  border-top: 2px solid var(--error);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.fl-delete-confirm-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fca5a5;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .fl-proposal-top {
+    flex-direction: column;
+  }
+
+  .fl-bid-area {
+    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-md);
+  }
+}
