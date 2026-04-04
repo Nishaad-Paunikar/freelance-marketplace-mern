@@ -339,6 +339,12 @@ input, textarea, select {
   cursor: pointer;
 }
 
+.form-input.input-error,
+.form-textarea.input-error {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
 .form-error {
   font-size: 13px;
   color: var(--error);
