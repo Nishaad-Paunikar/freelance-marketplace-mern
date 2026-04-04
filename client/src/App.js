@@ -17,6 +17,7 @@ import ProjectDetailPage   from './pages/ProjectDetailPage';
 import ClientDashboard     from './pages/ClientDashboard';
 import PostProjectPage     from './pages/PostProjectPage';
 import FreelancerDashboard from './pages/FreelancerDashboard';
+import ProposalsPage       from './pages/ProposalsPage';
 
 import './App.css';
 
@@ -64,6 +65,14 @@ const AppRoutes = () => (
         element={
           <ProtectedRoute role="client">
             <PostProjectPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dashboard/client/proposals/:projectId"
+        element={
+          <ProtectedRoute role="client">
+            <ProposalsPage />
           </ProtectedRoute>
         }
       />

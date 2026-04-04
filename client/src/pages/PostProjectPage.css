@@ -1,0 +1,113 @@
+/* PostProjectPage.css */
+
+/* ── Page layout: centered card ─────────────────────────────── */
+.post-project-page {
+  min-height: calc(100vh - var(--navbar-height));
+  padding-top: calc(var(--navbar-height) + var(--space-2xl));
+  padding-bottom: var(--space-3xl);
+}
+
+.post-project-container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.post-project-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-lg);
+  animation: authFadeIn 0.4s ease both;
+}
+
+/* ── Header ──────────────────────────────────────────────────── */
+.post-project-header {
+  margin-bottom: var(--space-xl);
+}
+
+.post-project-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: var(--space-lg);
+  transition: color var(--transition-fast);
+}
+
+.post-project-back:hover {
+  color: var(--text-secondary);
+}
+
+.post-project-title {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: var(--space-xs);
+}
+
+.post-project-sub {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ── Budget field hint ───────────────────────────────────────── */
+.budget-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: var(--space-xs);
+}
+
+/* ── Character counter ───────────────────────────────────────── */
+.char-counter {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: right;
+  margin-top: var(--space-xs);
+}
+
+.char-counter.near-limit {
+  color: var(--warning);
+}
+
+/* ── Tips sidebar ────────────────────────────────────────────── */
+.post-project-tips {
+  margin-top: var(--space-lg);
+  background: rgba(124, 58, 237, 0.06);
+  border: 1px solid rgba(124, 58, 237, 0.15);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+}
+
+.post-project-tips-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-light);
+  margin-bottom: var(--space-sm);
+}
+
+.post-project-tips ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.post-project-tips li {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding-left: var(--space-md);
+  position: relative;
+}
+
+.post-project-tips li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent-light);
+  font-weight: 700;
+}

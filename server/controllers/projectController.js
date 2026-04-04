@@ -1,6 +1,16 @@
 const Project = require("../models/Project");
 
-// CREATE PROJECT (client only)
+// GET CLIENT'S OWN PROJECTS
+exports.getMyProjects = async (req, res) => {
+  try {
+    const projects = await Project.find({ client: req.user._id })
+      .sort({ createdAt: -1 });
+    res.json(projects);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 exports.createProject = async (req, res) => {
   try {
     const { title, description, budget } = req.body;

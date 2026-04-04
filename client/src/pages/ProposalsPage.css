@@ -1,0 +1,193 @@
+/* ProposalsPage.css */
+
+/* ── Layout ──────────────────────────────────────────────────── */
+.proposals-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+/* ── Proposal cards list ─────────────────────────────────────── */
+.proposal-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Individual proposal card */
+.proposal-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.proposal-item:hover {
+  border-color: var(--border-light);
+  box-shadow: var(--shadow-md);
+}
+
+.proposal-item.accepted {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.03);
+}
+
+/* ── Proposal header ─────────────────────────────────────────── */
+.proposal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.proposal-freelancer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.proposal-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-primary), #c084fc);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.proposal-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.proposal-email {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ── Bid amount ──────────────────────────────────────────────── */
+.proposal-bid {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.proposal-bid-amount {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+}
+
+.proposal-bid-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* ── Message body ────────────────────────────────────────────── */
+.proposal-message {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ── Proposal footer ─────────────────────────────────────────── */
+.proposal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.proposal-date {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ── Project summary (sidebar) ───────────────────────────────── */
+.proposals-project-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  position: sticky;
+  top: calc(var(--navbar-height) + var(--space-lg));
+}
+
+.proposals-project-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+  line-height: 1.3;
+}
+
+.proposals-project-budget {
+  font-size: 26px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-light), #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: var(--space-md) 0 var(--space-xs);
+}
+
+/* ── Mark complete section ───────────────────────────────────── */
+.mark-complete-box {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border-color);
+}
+
+.mark-complete-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.mark-complete-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+  line-height: 1.5;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .proposals-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .proposals-project-card {
+    position: static;
+    order: -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .proposal-header {
+    flex-direction: column;
+  }
+
+  .proposal-bid {
+    text-align: left;
+  }
+}
