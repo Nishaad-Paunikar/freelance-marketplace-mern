@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 
 // Context
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { ToastProvider }         from './context/ToastContext';
 
 // Layout components
 import Navbar         from './components/Navbar';
@@ -96,9 +97,11 @@ const AppRoutes = () => (
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <AppRoutes />
-      </Router>
+      <ToastProvider>
+        <Router>
+          <AppRoutes />
+        </Router>
+      </ToastProvider>
     </AuthProvider>
   );
 }

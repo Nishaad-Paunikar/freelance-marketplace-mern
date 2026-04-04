@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import api from '../utils/api';
 import { useAuth } from '../context/AuthContext';
+import { useToast } from '../context/ToastContext';
 import './ClientDashboard.css';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -23,6 +24,7 @@ const formatDate = (dateStr) =>
 const ClientDashboard = () => {
   const { user }   = useAuth();
   const location   = useLocation();
+  const { showToast } = useToast();
 
   const [projects, setProjects] = useState([]);
   const [loading,  setLoading]  = useState(true);
@@ -63,10 +65,10 @@ const ClientDashboard = () => {
     setCompleting(projectId);
     try {
       const res = await api.put(`/projects/complete/${projectId}`);
-      // Update the local list
       setProjects(prev =>
         prev.map(p => p._id === projectId ? res.data.project : p)
       );
+      showToast('Project marked as complete! ✅', 'success');
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to mark project as complete.');
     } finally {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useToast } from '../context/ToastContext';
 import api from '../utils/api';
 import './AuthPages.css';
 
@@ -11,6 +12,7 @@ import './AuthPages.css';
  */
 const LoginPage = () => {
   const { login } = useAuth();
+  const { showToast } = useToast();
   const navigate  = useNavigate();
   const location  = useLocation();
 
@@ -38,6 +40,7 @@ const LoginPage = () => {
 
       // Persist to context + localStorage
       login(user, token);
+      showToast(`Welcome back, ${user.name.split(' ')[0]}! 👋`, 'success');
 
       // Redirect logic
       if (from) {

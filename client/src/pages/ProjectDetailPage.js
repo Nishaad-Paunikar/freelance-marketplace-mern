@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import api from '../utils/api';
 import { useAuth } from '../context/AuthContext';
+import { useToast } from '../context/ToastContext';
 import './ProjectDetailPage.css';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -30,6 +31,7 @@ const ProposalForm = ({ projectId }) => {
   const [loading,   setLoading]   = useState(false);
   const [error,     setError]     = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const { showToast } = useToast();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,6 +49,7 @@ const ProposalForm = ({ projectId }) => {
         bidAmount: Number(bidAmount),
       });
       setSubmitted(true);
+      showToast('Proposal submitted successfully! 🎉', 'success');
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to submit proposal. Please try again.');
     } finally {

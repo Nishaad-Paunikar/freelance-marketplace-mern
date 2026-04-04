@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../utils/api';
 import { useAuth } from '../context/AuthContext';
+import { useToast } from '../context/ToastContext';
 import './FreelancerDashboard.css';
 import './ClientDashboard.css'; // reuse dashboard-welcome + dashboard-stats
 
@@ -18,6 +19,7 @@ const EditForm = ({ proposal, onSave, onCancel }) => {
   const [message,   setMessage] = useState(proposal.message);
   const [loading,   setLoading] = useState(false);
   const [error,     setError]   = useState('');
+  const { showToast }           = useToast();
 
   const handleSave = async () => {
     if (!message.trim()) return setError('Message cannot be empty.');
@@ -30,6 +32,7 @@ const EditForm = ({ proposal, onSave, onCancel }) => {
         message:   message.trim(),
         bidAmount: Number(bidAmount),
       });
+      showToast('Proposal updated successfully! ✏️', 'success');
       onSave(res.data);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to save changes.');
@@ -86,12 +89,14 @@ const EditForm = ({ proposal, onSave, onCancel }) => {
 const DeleteConfirm = ({ proposalId, onConfirm, onCancel }) => {
   const [loading, setLoading] = useState(false);
   const [error,   setError]   = useState('');
+  const { showToast }         = useToast();
 
   const handleDelete = async () => {
     setLoading(true);
     setError('');
     try {
       await api.delete(`/proposals/${proposalId}`);
+      showToast('Proposal deleted successfully 🗑️', 'info');
       onConfirm(proposalId);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to delete proposal.');

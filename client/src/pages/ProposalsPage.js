@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import api from '../utils/api';
+import { useToast } from '../context/ToastContext';
 import './ProposalsPage.css';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -18,13 +19,12 @@ const formatDate = (dateStr) =>
  */
 const ProposalsPage = () => {
   const { projectId } = useParams();
-
+  const { showToast } = useToast();
 
   const [project,   setProject]   = useState(null);
   const [proposals, setProposals] = useState([]);
   const [loading,   setLoading]   = useState(true);
   const [error,     setError]     = useState('');
-  const [actionMsg, setActionMsg] = useState('');
 
   // IDs being acted on (to show per-button loading)
   const [accepting,   setAccepting]   = useState(null);
@@ -58,12 +58,10 @@ const ProposalsPage = () => {
   const handleAccept = async (proposalId) => {
     setAccepting(proposalId);
     setError('');
-    setActionMsg('');
     try {
       const res = await api.put(`/proposals/accept/${proposalId}`);
-      // Update local project status
       setProject(res.data.project);
-      setActionMsg('✅ Proposal accepted! Project is now assigned.');
+      showToast('Proposal accepted! Project is now assigned. 🎉', 'success');
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to accept proposal.');
     } finally {
@@ -75,11 +73,10 @@ const ProposalsPage = () => {
   const handleComplete = async () => {
     setCompleting(true);
     setError('');
-    setActionMsg('');
     try {
       const res = await api.put(`/projects/complete/${projectId}`);
       setProject(res.data.project);
-      setActionMsg('🎉 Project marked as completed!');
+      showToast('Project marked as completed! ✅', 'success');
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to complete project.');
     } finally {
@@ -117,8 +114,7 @@ const ProposalsPage = () => {
         </div>
 
         {/* Alerts */}
-        {error     && <div className="alert alert-error">{error}</div>}
-        {actionMsg && <div className="alert alert-success">{actionMsg}</div>}
+        {error && <div className="alert alert-error">{error}</div>}
 
         {/* Error state */}
         {error && !project && (

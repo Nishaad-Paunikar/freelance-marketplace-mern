@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../utils/api';
+import { useToast } from '../context/ToastContext';
 import './PostProjectPage.css';
 
 const MAX_DESC = 2000;
@@ -11,6 +12,7 @@ const MAX_DESC = 2000;
  */
 const PostProjectPage = () => {
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const [formData, setFormData] = useState({
     title:       '',
@@ -66,6 +68,7 @@ const PostProjectPage = () => {
         description: formData.description.trim(),
         budget:      Number(formData.budget),
       });
+      showToast('Project published successfully! 🚀', 'success');
       // Redirect with success signal
       navigate('/dashboard/client', { state: { newProject: true } });
     } catch (err) {
